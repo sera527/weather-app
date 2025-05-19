@@ -1,11 +1,11 @@
 {
-    "name": "laravel/laravel",
+    "name": "sera527/weather-app",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Weather API application that allows users to subscribe to weather updates for their city.",
+    "keywords": ["laravel", "weather"],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
+        "php": "^8.4",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
