@@ -19,5 +19,3 @@ yarn-error.log
 /.vscode
 .DS_Store
 /docker-compose/mysql
-supervisord.log
-supervisord.pid
