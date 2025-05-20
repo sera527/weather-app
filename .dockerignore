@@ -1,0 +1,14 @@
+.git
+.github
+.idea
+node_modules
+vendor
+public/storage
+storage/framework/sessions/*
+storage/framework/cache/data/*
+storage/framework/views/*.php
+storage/logs/*.log
+bootstrap/cache/*.php
+.env
+Dockerfile
+docker-compose.yml
