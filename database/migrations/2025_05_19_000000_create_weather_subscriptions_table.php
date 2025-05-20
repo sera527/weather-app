@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('weather_subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->unique(); // Робимо email унікальним
+            $table->string('email')->unique();
             $table->string('city');
             $table->enum('frequency', FrequencyType::values());
             $table->boolean('is_active')->default(false);
