@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CurrentWeatherController;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [CurrentWeatherController::class, 'index']);
+Route::get('/', [IndexController::class, 'index']);
