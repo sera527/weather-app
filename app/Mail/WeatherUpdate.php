@@ -15,29 +15,21 @@ class WeatherUpdate extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
     public function __construct(
         public WeatherSubscription $subscription,
         public array $weatherData,
-        public string $unsubscribeUrl
+        public string $unsubscribeUrl,
     ) {}
 
-    /**
-     * Get the message envelope.
-     */
     public function envelope(): Envelope
     {
         $frequency = $this->subscription->frequency === FrequencyType::HOURLY ? 'Hourly' : 'Daily';
+
         return new Envelope(
             subject: "{$frequency} Weather Update for {$this->subscription->city}",
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
     public function content(): Content
     {
         return new Content(
@@ -45,11 +37,6 @@ class WeatherUpdate extends Mailable implements ShouldQueue
         );
     }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
     public function attachments(): array
     {
         return [];

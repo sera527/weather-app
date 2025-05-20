@@ -3,7 +3,6 @@
 namespace App\Services\Weather;
 
 use App\Exceptions\CityNotFound;
-use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;

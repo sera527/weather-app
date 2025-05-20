@@ -13,16 +13,9 @@ class WeatherController extends Controller
 {
     public function __construct(private readonly CurrentWeatherService $weatherService) {}
 
-    /**
-     * Get current weather for a city
-     *
-     * @param GetWeatherRequest $request
-     * @return JsonResponse
-     */
     public function index(GetWeatherRequest $request): JsonResponse
     {
         try {
-            // Отримання погодних даних через сервіс
             $weatherData = $this->weatherService->getWeatherForCity($request->input('city'));
 
             return response()->json($weatherData);
