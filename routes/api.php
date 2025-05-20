@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\SubscriptionController;
+use App\Http\Controllers\Api\WeatherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('weather', [WeatherController::class, 'index'])->name('weather');
+Route::post('subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
+Route::get('confirm/{token}', [SubscriptionController::class, 'confirm'])->name('confirm');
+Route::get('unsubscribe/{token}', [SubscriptionController::class, 'unsubscribe'])->name('unsubscribe');
