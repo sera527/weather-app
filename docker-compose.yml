@@ -1,5 +1,4 @@
 services:
-    # Сервіс застосунку (PHP, Nginx, Cron, Composer)
     app:
         build:
             context: .
@@ -16,7 +15,6 @@ services:
         networks:
             - laravel_network
 
-    # Сервіс бази даних (MySQL)
     db:
         image: mysql:8.0
         container_name: laravel_db
@@ -29,7 +27,7 @@ services:
         volumes:
             - ./docker-compose/mysql:/var/lib/mysql
         ports:
-            - "${DB_EXTERNAL_PORT:-33061}:3306" # Зовнішній порт для підключення до БД з хоста
+            - "${DB_EXTERNAL_PORT:-33061}:3306"
         networks:
             - laravel_network
 
