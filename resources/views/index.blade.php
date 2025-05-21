@@ -129,28 +129,23 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Налаштування AJAX CSRF токена
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
-            // Обробка форми погоди
             $('#weather-form').on('submit', function(e) {
                 e.preventDefault();
 
                 const city = $('#city').val();
 
-                // Очищаємо повідомлення про помилки
                 $('#weather-error').hide();
 
-                // Показуємо індикатор завантаження
                 $('#weather-loader').show();
                 $('#weather-results').hide();
                 $('#subscription-section').hide();
 
-                // Відправляємо AJAX запит
                 $.ajax({
                     url: '{{ route("api.weather") }}',
                     type: 'GET',
@@ -158,36 +153,27 @@
                         city: city
                     },
                     success: function(response) {
-                        // Приховуємо індикатор завантаження
                         $('#weather-loader').hide();
 
-                        // Оновлюємо дані про погоду
                         $('#temperature').text(response.temperature + '°C');
                         $('#humidity').text('Humidity: ' + response.humidity + '%');
-                        $('#description').text('Condition: ' + response.description);
+                        $('#description').text('Description: ' + response.description);
 
-                        // Показуємо результати
                         $('#weather-results').fadeIn();
 
-                        // Заповнюємо поле міста у формі підписки
                         $('#sub-city').val(city);
 
-                        // Показуємо форму підписки
                         $('#subscription-section').fadeIn();
                     },
                     error: function(xhr) {
-                        // Приховуємо індикатор завантаження
                         $('#weather-loader').hide();
 
-                        // Показуємо повідомлення про помилку
                         let errorMsg = 'Failed to get weather data';
 
                         if (xhr.responseJSON) {
                             if (xhr.responseJSON.errors && xhr.responseJSON.errors.city) {
-                                // Помилка валідації поля city
                                 errorMsg = xhr.responseJSON.errors.city[0];
                             } else if (xhr.responseJSON.message) {
-                                // Загальне повідомлення про помилку
                                 errorMsg = xhr.responseJSON.message;
                             }
                         }
@@ -197,20 +183,16 @@
                 });
             });
 
-            // Обробка форми підписки
             $('#subscription-form').on('submit', function(e) {
                 e.preventDefault();
 
-                // Очищаємо повідомлення про успіх і помилки
                 $('#subscription-success').hide();
                 $('#subscription-error').hide();
 
-                // Отримуємо дані з форми
                 const city = $('#sub-city').val();
                 const email = $('#email').val();
                 const frequency = $('input[name="frequency"]:checked').val();
 
-                // Відправляємо AJAX запит
                 $.ajax({
                     url: '{{ route("api.subscribe") }}',
                     type: 'POST',
@@ -221,14 +203,11 @@
                         _token: $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
-                        // Показуємо повідомлення про успіх
                         $('#subscription-success').text('Successfully subscribed to weather updates!').show();
 
-                        // Очищаємо форму
                         $('#subscription-form')[0].reset();
                     },
                     error: function(xhr) {
-                        // Показуємо повідомлення про помилку
                         let errorMsg = 'Failed to subscribe';
                         if (xhr.responseJSON && xhr.responseJSON.message) {
                             errorMsg = xhr.responseJSON.message;
